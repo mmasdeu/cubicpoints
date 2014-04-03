@@ -71,7 +71,7 @@ def_limits = indef_limit.convert_to_definite(N,v1)
 # Compute the integrals
 J_tau = 0
 minr = 1
-maxr = 100000
+maxr = 100000 # This will take a LONG time (a few hours)
 for lim in def_limits:
     int_1 = int_to_infty(E, lim.z0, lim.z1, lim.x0, lim.y0, range(minr, maxr), 10**-40)
     int_2 = int_to_infty(E, lim.z0, lim.z1, lim.x1, lim.y1, range(minr, maxr), 10**-40)
@@ -79,7 +79,7 @@ for lim in def_limits:
 
 print 'Computed J_tau = %s'%J_tau
 # J_tau should be about this (with norm up to 400000):
-# J_tau = 0.00052812842341311719013530664351567588044838295780612887075946 + 0.0013607546066441620241871911551164971148788596889916078617928*I
+# J_tau = 0.00052812842341311719013530664351567588 + 0.0013607546066441620241871911551164971148788*I
 
 
 # We compare the result with the precomputed point
@@ -103,4 +103,4 @@ z_P = LK0.elliptic_logarithm(EK(P), prec_bits)
 # It is unclear to us why the factors of 2*pi*I and the 23 appears in the formula.
 # It may be connected to the BSD formula
 z_tau = (2*pi*I)**3 * CC(23).sqrt()/Omega_E *J_tau
-print gp.lindep([z_tau,z_P,B0[0],B0[1]],32)
+print gp.lindep([z_tau,z_P,B0[0],B0[1]],19)
